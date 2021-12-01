@@ -35,7 +35,7 @@ canvas.addEventListener('mousemove', function(e){
 	const y = e.clientY;
 	if (draws){
 		draw(x, y, 5);
-		pickedColor();
+		switchColor();
 	}
 })
 
@@ -55,10 +55,13 @@ document.addEventListener('keydown', function(e){
 	}
 })
 
-function pickedColor(){
+
+
+function switchColor(){
 	document.addEventListener('keydown', function(e){
 		//console.log(this);
 		//console.log(e);
+		defaultColor = false;
 		if (e.key == 'b'){
 			ctx.fillStyle = "rgb(0, 0, 255)";
 			console.log("Color is blue");
@@ -80,8 +83,8 @@ function pickedColor(){
 	colorPicker.addEventListener('change', function(){
 		defaultColor = false;
 		ctx.fillStyle = colorPicker.value;
-		console.log("Color changed");
-	})
+		console.log("Color changed");})
+
 }
 
 // Functions!
@@ -92,7 +95,7 @@ function draw(x, y, radius) {
 	ctx.beginPath();
 	ctx.arc(x, y, radius, 0, 2 * Math.PI*2, false);
 	if (defaultColor) {
-		ctx.fillStyle = "rgb(255, 255, 0)";
+		ctx.fillStyle = "rgb(255, 0, 0)";
 	}
 	// ensures that the color defaults to red
 	ctx.fill();
