@@ -34,7 +34,8 @@ canvas.addEventListener('mousemove', function(e){
 	const x = e.clientX;
 	const y = e.clientY;
 	if (draws){
-		draw(x, y, 5, pickedColor);
+		draw(x, y, 5);
+		pickedColor();
 	}
 })
 
@@ -55,13 +56,6 @@ document.addEventListener('keydown', function(e){
 })
 
 function pickedColor(){
-	//Add a listener for the color picker
-	colorPicker.addEventListener('change', function(){
-		defaultColor = false;
-		color = colorPicker.value;
-		console.log("Color changed");
-	})
-}{
 	document.addEventListener('keydown', function(e){
 		//console.log(this);
 		//console.log(e);
@@ -81,21 +75,25 @@ function pickedColor(){
 			ctx.fillStyle = "rgb(255, 255, 0)";
 			console.log("Color is yellow");
 		}
+	});
+	//Add a listener for the color picker
+	colorPicker.addEventListener('change', function(){
+		defaultColor = false;
+		ctx.fillStyle = colorPicker.value;
+		console.log("Color changed");
 	})
 }
 
 // Functions!
 // I would add a function for draw
-function draw(x, y, radius, pickedColor) {
+function draw(x, y, radius) {
 	console.log("I am going to draw!!");
 	//CHECK OUT beginPath()
 	ctx.beginPath();
-	ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+	ctx.arc(x, y, radius, 0, 2 * Math.PI*2, false);
 	if (defaultColor) {
 		ctx.fillStyle = "rgb(255, 255, 0)";
 	}
-	else{
-		ctx.fillStyle = color;
-	}
+	// ensures that the color defaults to red
 	ctx.fill();
 }
